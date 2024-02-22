@@ -1,0 +1,10 @@
+# project-specific aliases not included.
+alias gfp="git fetch && git pull"
+alias gs="git status"
+alias ga="git add ."
+alias gc="git commit -m"
+alias gp="git push"
+alias mcb="mincbuild"
+alias tsi="tokei src include"
+alias mfr="make -B -j$(nproc)"
+alias mc="medioed -c"

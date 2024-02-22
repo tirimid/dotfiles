@@ -2,7 +2,9 @@
 
 DOTFILES := \
 	home/.aliases \
-	home/.bashrc
+	home/.bashrc \
+	home/.inputrc \
+	home/.zshrc
 
 install:
 	cp $(DOTFILES) ~

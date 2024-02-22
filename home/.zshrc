@@ -6,17 +6,21 @@ case $- in
 		;;
 esac
 
-HISTCONTROL=ignoreboth
 HISTSIZE=100
-HISTFILESIZE=1000
+SAVEHIST=1000
 
-shopt -s checkwinsize
-shopt -s histappend
-shopt -s globstar
+autoload -Uz compinit && compinit
+autoload -U colors && colors
+
+# inputrc case insensitivity doesn't work on zsh, set manually.
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 . /etc/profile
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# zsh adds a bunch of aliases for some reason, remove them.
+unalias -m "*"
 
 # alias some basic commands to colored variants.
 alias ls="ls --color=auto"
@@ -34,4 +38,4 @@ fi
 # if not, you should add a symlink to cross build at `/opt/cross`.
 export PATH="$PATH:/opt/cross/bin"
 
-PS1="\033[1;34m\W\033[0m "
+PS1="%F{012}%c%F{reset} "

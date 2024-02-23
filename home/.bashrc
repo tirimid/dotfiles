@@ -16,8 +16,6 @@ shopt -s globstar
 
 . /etc/profile
 
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
 # alias some basic commands to colored variants.
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
@@ -35,3 +33,22 @@ fi
 export PATH="$PATH:/opt/cross/bin"
 
 PS1="\033[1;34m\W\033[0m "
+
+# this setup uses fbterm+tmux in TTY.
+# set 0 to disable.
+CONF_TTY_FBTERM_TMUX=1
+if [[ $CONF_TTY_FBTERM_TMUX -eq 1 ]]
+then
+	# kind of a hacky way to enter fbterm, then tmux in fbterm.
+	if [[ $TTY_IN_FBTERM -ne 1 ]]
+	then
+		export TTY_IN_FBTERM=1
+		exec fbterm
+	fi
+
+	if [[ $TTY_IN_TMUX -ne 1 ]]
+	then
+		export TTY_IN_TMUX=1
+		exec tmux
+	fi
+fi
